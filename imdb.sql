@@ -3,38 +3,40 @@ create database  IF NOT EXISTS imdb  DEFAULT CHARACTER SET utf8 COLLATE utf8_gen
 use imdb;
 
 CREATE TABLE Actor (
-    ActorID int NOT NULL,
+    ActorID int NOT NULL AUTO_INCREMENT,
     name varchar(255) NOT NULL, 
     PRIMARY KEY (ActorID)
 );
 
 CREATE TABLE Director (
-    DirectorID int NOT NULL,
+    DirectorID int NOT NULL AUTO_INCREMENT,
     name varchar(255) NOT NULL,
     PRIMARY KEY (DirectorID)
 );
 
 CREATE TABLE Film (
-    FilmID int NOT NULL,
+    FilmID int NOT NULL AUTO_INCREMENT,
     title  varchar(255) NOT NULL,
     PRIMARY KEY (FilmID)    
 );
 
 CREATE TABLE Movie (
-    MovieID int NOT NULL,
-    title  varchar(255) NOT NULL,
-    ActorID int,
+    MovieID int NOT NULL AUTO_INCREMENT,
+    ActorID int,   
     FilmID int,
+    DirectorID int,
     PRIMARY KEY (MovieID),
     FOREIGN KEY (ActorID) REFERENCES Actor(ActorID),
-    FOREIGN KEY (FilmID) REFERENCES Film(FilmID)
+    FOREIGN KEY (FilmID) REFERENCES Film(FilmID)    
 );
 
 
-
--- FOREIGN KEY (ActorID) REFERENCES Actor(ActorID),
-   --  FOREIGN KEY (DirectorID) REFERENCES Director(DirectorID)FOREIGN KEY (ActorID) REFERENCES Actor(ActorID),
-      -- FOREIGN KEY (DirectorID) REFERENCES Director(DirectorID)
+insert into Actor (name) values ('Leonardo DeCaprio'),('Kate Elizabeth Winslet'),('Elliot Pag'),('George Clooney'),('Joseph Gordon-Levittn'),('Brad Pitt'),('Matthew McConaughey'),('Christian Bale'),('Benedict Cumberbatch');
+insert into Film (title) values ('Inception'),('Titanic');
+insert into Director (name) values ('Christopher Nolan'),('James Cameron');
+insert into Movie (ActorID, FilmID,DirectorID) values (1,1,1),(1,2,2);
+ 
+select * from Movie; 
 
 
  /*insert into Film (title,ActorID,DirectorID) values ('Inception',1,1),('Titanic',1,2);
